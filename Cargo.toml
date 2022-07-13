@@ -8,5 +8,4 @@ edition = "2021"
 [dependencies]
 bevy = "0.7"
 dolly = "0.3.1" #camera
-glam = "0.21.2" #math for dolly, even tho bevy has vecs
-bevy_config_cam = "0.3.0" 
+glam = "0.21.2" #math for curve and dolly, even tho bevy has vecs

@@ -11,6 +11,7 @@ pub struct MyCursorMoved {
 
 /// This system prints out all mouse events as they come in
 pub fn print_mouse_events_system(
+    buttons: Res<Input<MouseButton>>,
     mut mouse_button_input_events: EventReader<MouseButtonInput>,
     mut mouse_motion_events: EventReader<MouseMotion>,
     mut cursor_moved_events: EventReader<MyCursorMoved>,
@@ -20,9 +21,9 @@ pub fn print_mouse_events_system(
         info!("{:?}", event);
     }
 
-    for event in mouse_motion_events.iter() {
-        info!("{:?}", event);
-    }
+    // for event in mouse_motion_events.iter() {
+    //     info!("{:?}", event);
+    // }
 
     for event in cursor_moved_events.iter() {
         info!("{:?}", event);
