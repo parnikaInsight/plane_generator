@@ -1,13 +1,15 @@
 use bevy::{prelude::*, window::PresentMode};
 
-mod mouse;
+mod mouse;//must include this in main, along with mod.rs, to find mod in crate
 use mouse::mouse_events;
 
 mod geometry;
-use geometry::plane;
+use geometry::my_plane;
 
 mod camera;
 use camera::pan_orbit;
+
+mod meshes;
 
 fn main() {
     println!("Hello, world!");
@@ -33,7 +35,7 @@ fn main() {
 
     //Systems
         //.add_system(mouse_events::print_mouse_events_system)
-        .add_startup_system(plane::setup_plane)
+        .add_startup_system(my_plane::setup_plane)
         .add_startup_system(pan_orbit::spawn_camera)
         .add_system(pan_orbit::pan_orbit_camera)
         .run();

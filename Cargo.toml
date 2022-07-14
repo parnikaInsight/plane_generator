@@ -9,3 +9,4 @@ edition = "2021"
 bevy = "0.7"
 dolly = "0.3.1" #camera
 glam = "0.21.2" #math for curve and dolly, even tho bevy has vecs
+fastrand = "1.7.0" 
