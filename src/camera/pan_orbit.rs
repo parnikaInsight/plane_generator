@@ -23,14 +23,15 @@ impl Default for PanOrbitCamera {
 }
 
 /// Pan the camera with middle mouse click, zoom with scroll wheel, orbit with right mouse click.
-pub fn pan_orbit_camera( //incorporate zooming **
+pub fn pan_orbit_camera(
+    //incorporate zooming **
     windows: Res<Windows>,
     mut ev_motion: EventReader<MouseMotion>,
     mut ev_scroll: EventReader<MouseWheel>,
+    keys: Res<Input<KeyCode>>,
     input_mouse: Res<Input<MouseButton>>,
     mut query: Query<(&mut PanOrbitCamera, &mut Transform, &PerspectiveProjection)>,
 ) {
-
     // change input mapping for orbit and panning here
     let orbit_button = MouseButton::Left;
     let pan_button = MouseButton::Right; //my primary mouse button is left; use actual mouse to test
@@ -40,18 +41,21 @@ pub fn pan_orbit_camera( //incorporate zooming **
     let mut scroll = 0.0;
     let mut orbit_button_changed = false;
 
-    if input_mouse.pressed(orbit_button) {
-        //println!("left pressed");
-        for ev in ev_motion.iter() {
-            rotation_move += ev.delta;
-        }
-    } else if input_mouse.pressed(pan_button) {
-        println!("right pressed");
-        // Pan only if we're not rotating at the moment
-        for ev in ev_motion.iter() {
-            pan += ev.delta;
+    if keys.pressed(KeyCode::Space){
+        if input_mouse.pressed(orbit_button) {
+            println!("space and orbit pressed");
+            for ev in ev_motion.iter() {
+                rotation_move += ev.delta;
+            }
+        } else if input_mouse.pressed(pan_button) {
+            println!("right pressed");
+            // Pan only if we're not rotating at the moment
+            for ev in ev_motion.iter() {
+                pan += ev.delta;
+            }
         }
     }
+
     for ev in ev_scroll.iter() {
         scroll += ev.y;
     }
@@ -74,7 +78,11 @@ pub fn pan_orbit_camera( //incorporate zooming **
             let window = get_primary_window_size(&windows);
             let delta_x = {
                 let delta = rotation_move.x / window.x * std::f32::consts::PI * 2.0;
-                if pan_orbit.upside_down { -delta } else { delta }
+                if pan_orbit.upside_down {
+                    -delta
+                } else {
+                    delta
+                }
             };
             let delta_y = rotation_move.y / window.y * std::f32::consts::PI;
             let yaw = Quat::from_rotation_y(-delta_x);
@@ -104,7 +112,8 @@ pub fn pan_orbit_camera( //incorporate zooming **
             // parent = x and y rotation
             // child = z-offset
             let rot_matrix = Mat3::from_quat(transform.rotation);
-            transform.translation = pan_orbit.focus + rot_matrix.mul_vec3(Vec3::new(0.0, 0.0, pan_orbit.radius));
+            transform.translation =
+                pan_orbit.focus + rot_matrix.mul_vec3(Vec3::new(0.0, 0.0, pan_orbit.radius));
         }
     }
 }
@@ -120,12 +129,17 @@ pub fn spawn_camera(mut commands: Commands) {
     let translation = Vec3::new(-2.0, 2.5, 5.0);
     let radius = translation.length();
 
-    commands.spawn_bundle(PerspectiveCameraBundle {
-        transform: Transform::from_translation(translation)
-            .looking_at(Vec3::ZERO, Vec3::Y),
-        ..Default::default()
-    }).insert(PanOrbitCamera {
-        radius,
-        ..Default::default()
-    });
+    commands
+        .spawn_bundle(PerspectiveCameraBundle {
+            transform: Transform::from_translation(translation).looking_at(Vec3::ZERO, Vec3::Y),
+            ..Default::default()
+        })
+        // .insert_bundle(bevy_mod_picking::PickingCameraBundle::default())
+        // .insert(bevy_transform_gizmo::GizmoPickSource::default())
+        .insert(PanOrbitCamera {
+            radius,
+            ..Default::default()
+        })
+        .insert_bundle(bevy_mod_picking::PickingCameraBundle::default())
+        .insert(bevy_transform_gizmo::GizmoPickSource::default());
 }
