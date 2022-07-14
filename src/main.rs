@@ -9,22 +9,20 @@ use geometry::my_plane;
 mod camera;
 use camera::pan_orbit;
 
-mod meshes;
-
 fn main() {
     println!("Hello, world!");
     let mut app = bevy::app::App::new(); //new vs empty //bevy::App has more trait implementations than bevy_app
     app.add_plugin(bevy::core::CorePlugin::default())
     //Events
-        .add_event::<mouse_events::MyCursorMoved>()
+        //.add_event::<mouse_events::MyCursorMoved>()
 
     //Resources
         //Window: event loops, changing contexts
         .insert_resource(Msaa { samples: 4 }) //remove jaggedness
         .insert_resource(WindowDescriptor { //must come before DefaultPlugins
             title: "I am a window!".to_string(),
-            width: 600.0, //sub w/ scr_width but change from u32 to f32
-            height: 400.0,
+            width: 1600.0, //sub w/ scr_width but change from u32 to f32
+            height: 1000.0,
             present_mode: PresentMode::Fifo,
             ..default()
         })
@@ -41,4 +39,3 @@ fn main() {
         .run();
     //code never reaches here
 }
-

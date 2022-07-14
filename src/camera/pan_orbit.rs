@@ -128,5 +128,4 @@ pub fn spawn_camera(mut commands: Commands) {
         radius,
         ..Default::default()
     });
-    println!("camera spawned");
 }
