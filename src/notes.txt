@@ -1,10 +1,3 @@
-To-do
-- resize
-- spawn diff shapes
-- curve shapes
-- erase
-- pcg wooo
-
 Rules
 - press space to move camera
 - press B to insert block at midpoint
