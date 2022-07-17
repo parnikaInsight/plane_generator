@@ -707,6 +707,7 @@ dependencies = [
 [[package]]
 name = "bevy_transform_gizmo"
 version = "0.2.1"
+source = "git+https://github.com/paxsethorld/bevy_transform_gizmo.git?branch=main#63d355da9787c99d687bb3c5ae35ac0766958684"
 dependencies = [
  "bevy",
  "bevy_mod_picking",

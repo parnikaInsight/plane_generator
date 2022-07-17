@@ -11,7 +11,7 @@ use camera::pan_orbit;
 
 // mod resources;
 // use resources::plugin;
-//test git
+
 fn main() {
     println!("Hello, world!");
     let mut app = bevy::app::App::new(); //new vs empty //bevy::App has more trait implementations than bevy_app
