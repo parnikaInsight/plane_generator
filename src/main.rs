@@ -20,6 +20,7 @@ fn main() {
 
     //Resources
         //Window: event loops, changing contexts
+        .insert_resource(ClearColor(Color::rgb(0.9, 0.9, 0.4)))
         .insert_resource(Msaa { samples: 4 }) //remove jaggedness
         .insert_resource(WindowDescriptor { //must come before DefaultPlugins
             title: "I am a window!".to_string(),
