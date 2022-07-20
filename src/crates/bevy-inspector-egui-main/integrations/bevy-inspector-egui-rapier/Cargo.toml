@@ -1,0 +1,35 @@
+[package]
+name = "bevy-inspector-egui-rapier"
+version = "0.4.0"
+edition = "2021"
+repository = "https://github.com/jakobhellermann/bevy-inspector-egui/"
+
+readme = "README.md"
+license = "MIT"
+description = "bevy-inspector-egui integration for rapier"
+keywords = ["bevy", "inspector", "rapier", "physics"]
+categories = ["game-development", "gui", "visualization"]
+
+[features]
+rapier3d = ["bevy_rapier3d"]
+rapier2d = ["bevy_rapier2d"]
+
+[dependencies]
+bevy-inspector-egui = { version = "0.11", path = "../..", features = ["nalgebra031"] }
+bevy_rapier3d = { version = "0.15", optional = true }
+bevy_rapier2d = { version = "0.15", optional = true }
+bevy = { version = "0.7", default-features = false }
+
+[dev-dependencies]
+bevy = { version = "0.7", default-features = false, features = ["x11", "bevy_winit"] }
+
+[[example]]
+name = "rapier2d"
+required-features = ["rapier2d"]
+
+[[example]]
+name = "rapier3d"
+required-features = ["rapier3d"]
+
+[package.metadata.docs.rs]
+all-features = true

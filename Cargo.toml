@@ -15,3 +15,4 @@ bevy_transform_gizmo = {git = "https://github.com/paxsethorld/bevy_transform_giz
 bevy_mod_picking = "0.7.0"
 bevy_mod_raycast = "0.5.0"
 bevy_editor_pls = {path = "src/crates/bevy_editor_pls-main/crates/bevy_editor_pls"}
+bevy-inspector-egui = {path = "src/crates/bevy-inspector-egui-main"}
