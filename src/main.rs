@@ -9,6 +9,8 @@ use geometry::my_plane;
 mod camera;
 use camera::pan_orbit;
 
+use bevy_editor_pls::prelude::*;
+
 // mod resources;
 // use resources::plugin;
 
@@ -33,7 +35,8 @@ fn main() {
     //Plugins
         .add_plugins(DefaultPlugins) //disable log and winit plugin when put into subapp 
         .add_plugins(bevy_mod_picking::DefaultPickingPlugins)
-        .add_plugin(bevy_transform_gizmo::TransformGizmoPlugin::default()) // Use TransformGizmoPlugin::default() to align to the scene's coordinate system.
+        // .add_plugin(bevy_transform_gizmo::TransformGizmoPlugin::default()) // Use TransformGizmoPlugin::default() to align to the scene's coordinate system.
+        .add_plugin(EditorPlugin)
 
     //Startup Systems
        // .add_system(mouse_events::print_mouse_events_system)
