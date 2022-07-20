@@ -40,7 +40,7 @@ fn main() {
 
     //Plugins
         .add_plugins(DefaultPlugins) //disable log and winit plugin when put into subapp 
-        //.add_plugins(bevy_mod_picking::DefaultPickingPlugins)
+        .add_plugins(bevy_mod_picking::DefaultPickingPlugins)
         .add_plugin(bevy_transform_gizmo::TransformGizmoPlugin::default()) // Use TransformGizmoPlugin::default() to align to the scene's coordinate system.
         //.add_plugin(EditorPlugin)
         //.add_plugin(InspectorPlugin::<Data>::new())
