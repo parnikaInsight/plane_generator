@@ -10,6 +10,8 @@ mod camera;
 use camera::pan_orbit;
 
 use bevy_editor_pls::prelude::*;
+use bevy_inspector_egui::WorldInspectorPlugin;
+use bevy_inspector_egui::{InspectorPlugin, Inspectable};
 
 // mod resources;
 // use resources::plugin;
@@ -37,6 +39,8 @@ fn main() {
         .add_plugins(bevy_mod_picking::DefaultPickingPlugins)
         // .add_plugin(bevy_transform_gizmo::TransformGizmoPlugin::default()) // Use TransformGizmoPlugin::default() to align to the scene's coordinate system.
         .add_plugin(EditorPlugin)
+        //.add_plugin(InspectorPlugin::<Data>::new())
+        .add_plugin(WorldInspectorPlugin::new())
 
     //Startup Systems
        // .add_system(mouse_events::print_mouse_events_system)
@@ -47,4 +51,12 @@ fn main() {
         .add_system(pan_orbit::pan_orbit_camera)
         .add_system(my_plane::add_block)
         .run();
+}
+
+#[derive(Inspectable, Default)]
+struct Data {
+    should_render: bool,
+    text: String,
+    #[inspectable(min = 42.0, max = 100.0)]
+    size: f32,
 }
