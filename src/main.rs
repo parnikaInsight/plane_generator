@@ -1,6 +1,7 @@
 use bevy::{prelude::*, window::PresentMode};
 
-mod mouse;//must include this in main, along with mod.rs, to find mod in crate
+mod mouse;
+mod blender;//must include this in main, along with mod.rs, to find mod in crate
 use mouse::mouse_events;
 
 mod geometry;
@@ -8,6 +9,9 @@ use geometry::my_plane;
 
 mod camera;
 use camera::pan_orbit;
+
+mod blender;
+use blender::camera;
 
 use bevy_editor_pls::prelude::*;
 use bevy_inspector_egui::WorldInspectorPlugin;
@@ -50,6 +54,11 @@ fn main() {
     //Systems
         .add_system(pan_orbit::pan_orbit_camera)
         .add_system(my_plane::add_block)
+
+    //blender
+        .add_plugin(BlenderPlugin)
+        .add_startup_system(blender::camera::setup_blender_camera)
+
         .run();
 }
 
