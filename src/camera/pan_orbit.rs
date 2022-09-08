@@ -133,8 +133,6 @@ pub fn spawn_camera(mut commands: Commands) {
             transform: Transform::from_translation(translation).looking_at(Vec3::ZERO, Vec3::Y),
             ..Default::default()
         })
-        // .insert_bundle(bevy_mod_picking::PickingCameraBundle::default())
-        // .insert(bevy_transform_gizmo::GizmoPickSource::default())
         .insert(PanOrbitCamera {
             radius,
             ..Default::default()
